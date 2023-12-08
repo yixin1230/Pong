@@ -1,5 +1,6 @@
 import javax.swing.JFrame;
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 public class Window extends JFrame implements Runnable{
@@ -11,15 +12,18 @@ public class Window extends JFrame implements Runnable{
 
     Graphics2D g2;
     KL keyListener = new KL();
+    Rect ai, ball, playerOne;
     public Window() {
         this.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         this.setTitle(Constants.SCREEN_TITLE);
         this.setResizable(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //make sure that when you click the 'X', in the right-hand corner of the Window that it will actually close it.
         this.addKeyListener(keyListener);
         g2 = (Graphics2D)this.getGraphics();
+        playerOne = new Rect(20, 20, 10, 100,  Color.CYAN);
+        ai = new Rect(750, 20 , 10, 100, Color.WHITE);
+        ball = new Rect(400, 300, 10,10, Color.WHITE);
     }
 
     //dt delta time
@@ -27,14 +31,9 @@ public class Window extends JFrame implements Runnable{
     {
         g2.setColor(Color. BLACK);
         g2.fillRect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        if (keyListener.isKeyPressed(KeyEvent.VK_UP))
-        {
-            System.out.println("up");
-        }
-        else if (keyListener.isKeyPressed(KeyEvent.VK_DOWN))
-        {
-            System.out.println("Down");
-        }
+        ai.draw(g2);
+        ball.draw(g2);
+        playerOne.draw(g2);
     }
 
     public void run()
@@ -44,8 +43,21 @@ public class Window extends JFrame implements Runnable{
             double time = Time.getTime();
             double deltaTime = time - lastFrameTime;
             lastFrameTime = time;
-
             update(deltaTime);
+
+            try{
+                //If I don't use try and catch, it will show 'error: unreported exception InterruptedExecption;
+                // must be caught or declared'
+                Thread.sleep(200);
+                //My rectangle constantly "vibrated", then disappeared.
+                //The reason for this in my case was, that the update process was too fast, therefore the background
+                //constantly "overprinted" the rectangle. Had to send the thread to sleep in every cycle.
+            }
+            catch(InterruptedException e)
+            {
+
+            }
+
         }
     }
 
