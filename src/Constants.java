@@ -10,6 +10,5 @@ public class Constants {
 	public static final double PADDLE_SPEED = 300;
 	public static double TOOLBAR_HEIGHT;
 	public static double TOOLBAR_BOTTOM;
-
 	//It's a good practices
 }

@@ -14,6 +14,7 @@ public class Window extends JFrame implements Runnable{
     public KL keyListener = new KL();
     public Rect ai, ballRect, playerOne;
     public PlayerController playerController;
+    public AiController aiController;
     public Ball ball;
 
     public Window() {
@@ -25,12 +26,17 @@ public class Window extends JFrame implements Runnable{
         this.addKeyListener(keyListener);
         Constants.TOOLBAR_HEIGHT = this.getInsets().top;
         Constants.TOOLBAR_BOTTOM = this.getInsets().bottom;
+
         g2 = (Graphics2D)this.getGraphics();
+
         playerOne = new Rect(20, 20, 10, 100,  Color.CYAN);
         playerController = new PlayerController(playerOne, keyListener);
+
         ai = new Rect(750, 20 , 10, 100, Color.WHITE);
         ballRect = new Rect(400, 300, 10,10, Color.WHITE);
         ball = new Ball(ballRect, playerOne, ai);
+
+        aiController = new AiController(new PlayerController(ai), ballRect);
     }
 
     //dt delta time
@@ -38,11 +44,14 @@ public class Window extends JFrame implements Runnable{
     {
         g2.setColor(Color. BLACK);
         g2.fillRect(0, 0, (int)Constants.SCREEN_WIDTH, (int)Constants.SCREEN_HEIGHT);
-        playerController.update(dt);
-        ball.update(dt);
         ai.draw(g2);
         ballRect.draw(g2);
         playerOne.draw(g2);
+
+        playerController.update(dt);
+        ball.update(dt);
+        aiController.update(dt);
+
     }
 
     public void run()

@@ -44,6 +44,21 @@ public class Ball {
 
 		// position = position + velocity;
 		// velocity = velocity + acceleration;
+
+		if (vy > 0)
+		{
+			if (this.rect.y + this.rect.height > Constants.SCREEN_HEIGHT)
+			{
+				this.vy *= -1;
+			}
+		}
+		else if (vy < 0)
+		{
+			if (this.rect.y <Constants.TOOLBAR_HEIGHT)
+			{
+				this.vy *= -1;
+			}
+		}
 		this.rect.x += vx * dt;
 		this.rect.y += vy * dt;
 	}
