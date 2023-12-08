@@ -1,5 +1,6 @@
 import javax.swing.JFrame;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Window extends JFrame implements Runnable{
     //extend:
@@ -21,12 +22,19 @@ public class Window extends JFrame implements Runnable{
         g2 = (Graphics2D)this.getGraphics();
     }
 
-    //dt dalta time
+    //dt delta time
     public void update(double dt)
     {
         g2.setColor(Color. BLACK);
         g2.fillRect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        if
+        if (keyListener.isKeyPressed(KeyEvent.VK_UP))
+        {
+            System.out.println("up");
+        }
+        else if (keyListener.isKeyPressed(KeyEvent.VK_DOWN))
+        {
+            System.out.println("Down");
+        }
     }
 
     public void run()
