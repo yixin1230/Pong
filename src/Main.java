@@ -4,6 +4,9 @@ public class Main {
        Window window = new Window();
        Thread t1 = new Thread(window);
        t1.start();
+       //The run method can be called using the start() method
+        // or by calling the run() method itself.
+        //But when you use run() method for calling itself, it creates problems.
 
     }
 }

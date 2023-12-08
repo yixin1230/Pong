@@ -10,18 +10,22 @@ public class Window extends JFrame implements Runnable{
     //Implements:
         // is used when you want attributes of an interface in your class
 
-    Graphics2D g2;
-    KL keyListener = new KL();
-    Rect ai, ball, playerOne;
+    public Graphics2D g2;
+    public KL keyListener = new KL();
+    public Rect ai, ball, playerOne;
+    public PlayerController playerController;
     public Window() {
-        this.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        this.setSize((int)Constants.SCREEN_WIDTH, (int)Constants.SCREEN_HEIGHT);
         this.setTitle(Constants.SCREEN_TITLE);
         this.setResizable(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.addKeyListener(keyListener);
+        Constants.TOOLBAR_HEIGHT = this.getInsets().top;
+        Constants.TOOLBAR_BOTTOM = this.getInsets().bottom;
         g2 = (Graphics2D)this.getGraphics();
         playerOne = new Rect(20, 20, 10, 100,  Color.CYAN);
+        playerController = new PlayerController(playerOne, keyListener);
         ai = new Rect(750, 20 , 10, 100, Color.WHITE);
         ball = new Rect(400, 300, 10,10, Color.WHITE);
     }
@@ -30,7 +34,8 @@ public class Window extends JFrame implements Runnable{
     public void update(double dt)
     {
         g2.setColor(Color. BLACK);
-        g2.fillRect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        g2.fillRect(0, 0, (int)Constants.SCREEN_WIDTH, (int)Constants.SCREEN_HEIGHT);
+        playerController.update(dt);
         ai.draw(g2);
         ball.draw(g2);
         playerOne.draw(g2);
@@ -48,7 +53,7 @@ public class Window extends JFrame implements Runnable{
             try{
                 //If I don't use try and catch, it will show 'error: unreported exception InterruptedExecption;
                 // must be caught or declared'
-                Thread.sleep(200);
+                Thread.sleep(50);
                 //My rectangle constantly "vibrated", then disappeared.
                 //The reason for this in my case was, that the update process was too fast, therefore the background
                 //constantly "overprinted" the rectangle. Had to send the thread to sleep in every cycle.
