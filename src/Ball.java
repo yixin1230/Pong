@@ -2,7 +2,7 @@ public class Ball {
 	public Rect rect;
 	public Rect leftPaddle, rightPaddle;
 
-	private double vy = 10.0;
+	private double vy = 400.0;
 	private double vx = -150.0;
 	//velocity x y
 
@@ -29,9 +29,9 @@ public class Ball {
 			}
 		}
 		else if (vx > 0){
-			if (this.rect.x + this.rect.width >= this.rightPaddle.x &&
-				this.rect.x <= this.rightPaddle.x + this.rightPaddle.width && this.rightPaddle.y <= this.rightPaddle.y + this.rightPaddle.height &&
-				this.rect.y >= this.rightPaddle.y + this.rightPaddle.height)
+			if (this.rect.x + this.rect.width >= this.rightPaddle.x && this.rect.x <= this.rightPaddle.x + this.rightPaddle.width &&
+				this.rect.y >= this.rightPaddle.y &&
+				this.rect.y <= this.rightPaddle.y + this.rightPaddle.height)
 			{
 				this.vx *= -1;
 				this.vy *= -1;
@@ -40,6 +40,7 @@ public class Ball {
 			{
 				System.out.println("AI has lost a point");
 			}
+
 		}
 
 		// position = position + velocity;
@@ -54,7 +55,7 @@ public class Ball {
 		}
 		else if (vy < 0)
 		{
-			if (this.rect.y <Constants.TOOLBAR_HEIGHT)
+			if (this.rect.y < Constants.TOOLBAR_HEIGHT)
 			{
 				this.vy *= -1;
 			}
