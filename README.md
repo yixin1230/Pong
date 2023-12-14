@@ -22,8 +22,11 @@ I have implemented this iconic game in Java as a means to practice and refine my
 
 ![Screenshot](https://github.com/yixin1230/Pong/assets/100164159/060f2ffa-96fb-43b6-b395-aded5b6b10b9)
 # Compile the project
+```
 cd src
 javac *.java
-
+```
 # run the project
+```
 java Main
+```
