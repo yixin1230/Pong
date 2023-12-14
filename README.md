@@ -13,6 +13,7 @@
 
 
 </p>
+![Screenshot 2023-12-14 at 17 37 11](https://github.com/yixin1230/Pong/assets/100164159/060f2ffa-96fb-43b6-b395-aded5b6b10b9)
 
 ## About
 Pong, often recognized as one of the pioneering computer games, is a classic "tennis-like" game featuring two paddles and a ball. The objective is simple yet engaging: players control the paddles to hit the ball back and forth across the screen.
